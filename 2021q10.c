@@ -11,6 +11,18 @@ bool canMakeSumHelper(int inputArray[], int arraysize, int targetSum, int curren
         canMakeSumHelper(inputArray, arraysize, targetSum, current + 1, remain);
 }
 
+bool canMakeSumHelper2(int* inputArray, int arraysize, int targetSum, int numNeeded) {
+    if (numNeeded == 0) {
+        return targetSum == 0;
+    }
+    if (arraysize == 0) {
+        return targetSum == 0 && numNeeded == 0;
+    }
+    
+    return canMakeSumHelper2(inputArray + 1, arraysize - 1, targetSum - inputArray[0], numNeeded - 1) ||
+        canMakeSumHelper2(inputArray + 1, arraysize - 1, targetSum, numNeeded);
+}
+
 bool canMakeSum(int inputArray[], int arraysize, int targetSum) {
     return canMakeSumHelper(inputArray, arraysize, targetSum, 0, 3);
 }

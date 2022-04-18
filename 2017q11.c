@@ -12,7 +12,7 @@ char* deleteSubstring(char* source, char* substring) {
     const int secondLen = strlen(source) - firstLen - substringLen;
     char* result = malloc(sizeof(char) * (firstLen + secondLen + 1));
     strncpy(result, source, firstLen);
-    strncpy(result + firstLen, source + firstLen + substringLen, secondLen);
+    strncpy(result + firstLen, source + firstLen + substringLen, secondLen + 1); // +1 for the extra space.
     return result;
 }
 
