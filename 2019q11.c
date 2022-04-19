@@ -10,32 +10,33 @@ typedef struct node {
 } LinkedList;
 
 void bubbleSortLinkedList(LinkedList* list) {
-    int listLen = 0;
+    int listSize = 0;
     Node* current;
 
     current = list->head;
+    // while (current != NULL) {
     while (current) {
-        ++listLen;
+        ++listSize;
         current = current->next;
     }
-    if (listLen <= 1) {
+    if (listSize == 0 || listSize == 1) {
         return;
     }
 
-    Node* next;
     bool sorted = false;
-    for (int top = listLen - 1; top > 0 && !sorted; --top) {
+    for (int top = listSize - 1; top > 0 && !sorted; --top) {
         sorted = true;
         current = list->head;
         for (int i = 0; i < top; ++i) {
-            next = current->next; 
-            if (current->data > next->data) {
-                int temp = current->data;
-                current->data = next->data;
-                next->data = temp;
+            // Traverse #top times.
+            Node* next = current->next;
+            if (current->data > next->data) { /* if (a[i] > a[i + 1]) */
+                int temp = next->data;
+                next->data = current->data;
+                current->data = temp;
                 sorted = false;
             }
-            current = next;
+            current = current->next;
         }
     }
 }
